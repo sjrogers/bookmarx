@@ -16,10 +16,7 @@ defmodule Bookmarx.Accounts.User do
   """
   def changeset(user, %{password: plaintext} = attrs) do
       attrs = attrs |> Map.merge( PwdHashing.add_hash(plaintext) )
-#        Map.put_new(attrs, :password_hash, plaintext |> hash_password)
-      user
-      |> cast(attrs, [:email, :password_hash])
-      |> validate_required([:email, :password_hash])
+      changeset(user, attrs)
   end
 
   @doc """
