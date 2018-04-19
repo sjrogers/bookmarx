@@ -9,6 +9,10 @@ use Mix.Config
 config :bookmarx,
   ecto_repos: [Bookmarx.Repo]
 
+config :bookmarx, Bookmarx.Auth.Guardian,
+  issuer: "bookmarx"
+  # secret key defined in environment-specific configs
+
 # Configures the endpoint
 config :bookmarx, BookmarxWeb.Endpoint,
   url: [host: "localhost"],

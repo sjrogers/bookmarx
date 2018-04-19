@@ -14,6 +14,8 @@ config :bookmarx, BookmarxWeb.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     cd: Path.expand("../assets", __DIR__)]]
 
+config :bookmarx, Bookmarx.Auth.Guardian,
+ secret_key: "never_use_me_in_production"
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

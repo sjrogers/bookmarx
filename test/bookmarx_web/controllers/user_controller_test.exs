@@ -42,6 +42,17 @@ defmodule BookmarxWeb.UserControllerTest do
     end
   end
 
+# TODO: authentication test
+#  describe "authenticate user" do
+#    setup [:create_user]
+#
+#    test "matches valid password with hash", %{conn: conn, user: %User{password: plaintext} = user} do
+#      conn = put conn, user_path(conn, :authenticate, user), user: @create_attrs
+#      assert conn.status(:authenticated)
+#    end
+#  end
+
+
   describe "update user" do
     setup [:create_user]
 

@@ -17,3 +17,6 @@ config :bookmarx, Bookmarx.Repo,
   database: "bookmarx_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Test password hashing less strict
+config :pbkdf2_elixir, :rounds, 1
