@@ -24,5 +24,8 @@ defmodule BookmarxWeb.Router do
 
      resources "/users", UserController, except: [:new, :edit]
      resources "/things", ThingController, except: [:new, :edit]
+     resources "/omnibi", OmnibusController,  except: [:new, :edit]
+     # TODO: nest exhibits under omnibus
+     resources "/exhibits", ExhibitController, except: [:new, :edit]
    end
 end
