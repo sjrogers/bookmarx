@@ -23,5 +23,6 @@ defmodule BookmarxWeb.Router do
      pipe_through :api
 
      resources "/users", UserController, except: [:new, :edit]
+     resources "/things", ThingController, except: [:new, :edit]
    end
 end
