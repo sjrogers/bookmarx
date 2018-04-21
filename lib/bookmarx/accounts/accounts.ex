@@ -16,10 +16,12 @@ defmodule Bookmarx.Accounts do
     query = from u in "users",
                  where: u.email == ^email,
                  select: u.id
-    user_id = query |> Bookmarx.Repo.one
-    user = Bookmarx.Accounts.get_user!(user_id)
-    password_hash = user.password_hash
-    Comeonin.Pbkdf2.checkpw(plaintext, password_hash)
+#    user_id = query |> Bookmarx.Repo.one
+    user = query
+           |> Bookmarx.Repo.one
+           |> Bookmarx.Accounts.get_user!
+#    password_hash = user.password_hash
+    Comeonin.Pbkdf2.checkpw(plaintext, user.password_hash)
   end
 
   @doc """

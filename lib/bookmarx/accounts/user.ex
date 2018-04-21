@@ -15,7 +15,9 @@ defmodule Bookmarx.Accounts.User do
   hash password if given as plaintext, e.g. in login process
   """
   def changeset(user, %{password: plaintext} = attrs) do
-      attrs = attrs |> Map.merge( PwdHashing.add_hash(plaintext) )
+      attrs = attrs
+              |> Map.merge( PwdHashing.add_hash(plaintext) ) # add password_hash
+              |> Map.delete( :password ) # remove password key
       changeset(user, attrs)
   end
 
