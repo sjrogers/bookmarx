@@ -17,15 +17,27 @@ defmodule Bookmarx.AuthTest do
       user
     end
 
+    test "guardian identifies user correctly" do
+      alias Bookmarx.Auth.Guardian
+      user = user_fixture()
+      empty_claims = []
+      expected = {:ok, to_string(user.id)}
+
+      {:ok, sub} =
+        user
+        |> Guardian.subject_for_token(empty_claims)
+
+      assert {:ok, user} == Guardian.resource_from_claims(%{"sub": sub})
+    end
+
     test "user authenticates with correct password" do
-      user_fixture()
-      assert Accounts.authenticate_user(@valid_attrs)
+      user = user_fixture()
+      assert {:ok, user} == Accounts.authenticate_user(@valid_attrs)
     end
 
     test "user fails to authenticate with incorrect password" do
       user_fixture()
-      authenticates? = Accounts.authenticate_user(@invalid_attrs)
-      assert authenticates? == false
+      assert {:error, :invalid_credentials} == Accounts.authenticate_user(@invalid_attrs)
     end
   end
 end

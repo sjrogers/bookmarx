@@ -1,17 +1,16 @@
 defmodule Bookmarx.Auth.Guardian do
   @moduledoc false
-#  use Guardian, otp_app: :bookmarx
+  use Guardian, otp_app: :bookmarx
 
-  def subject_for_token(resource, _claims) do
-    sub = to_string(resource.id)
+  alias Bookmarx.Accounts
+
+  def subject_for_token(user, _claims) do
+    sub = to_string(user.id)
     {:ok, sub}
   end
 
-  def resource_from_claims(claims) do
-    id = claims["sub"]
-    # TODO: get_resource_by_id
-#    resource = Bookmarx.get_resource_by_id(id)
-    {resource, _} = {true, id}
-    {:ok, resource}
+  def resource_from_claims(%{"sub": id}) do
+    user = Accounts.get_user!(id)
+    if user != nil, do: {:ok, user}, else: {:error, :resource_not_found}
   end
 end
