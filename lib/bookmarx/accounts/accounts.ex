@@ -9,6 +9,25 @@ defmodule Bookmarx.Accounts do
   alias Bookmarx.Accounts.User
 
   @doc """
+  authenticate a user with a password
+  """
+  def authenticate_user(%{email: email, password: plaintext} = attrs) do
+    import Ecto.Query
+    query = from u in "users",
+                 where: u.email == ^email,
+                 select: u.id
+    user = query
+           |> Bookmarx.Repo.one
+           |> Bookmarx.Accounts.get_user!
+    # verify password
+    if Comeonin.Pbkdf2.checkpw(plaintext, user.password_hash) do
+      {:ok, user}
+    else
+      {:error, :invalid_credentials}
+    end
+  end
+
+  @doc """
   Returns the list of users.
 
   ## Examples

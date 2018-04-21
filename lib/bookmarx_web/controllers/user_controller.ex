@@ -11,6 +11,17 @@ defmodule BookmarxWeb.UserController do
     render(conn, "index.json", users: users)
   end
 
+  @doc """
+  authenticate a user with a password
+  """
+  def authenticate(conn, %{"user" => user_params}) do
+    with {:ok, %User{} = user} <- Accounts.authenticate_user(user_params) do
+      conn
+      |> put_status(:authenticated)
+      |> render("show.json", user: user)
+    end
+  end
+
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       conn

@@ -6,6 +6,7 @@ defmodule Bookmarx.AccountsTest do
   describe "users" do
     alias Bookmarx.Accounts.User
 
+    # see auth_test.exs for tests involving plaintext passwords
     @valid_attrs %{email: "some email", password_hash: "some password_hash"}
     @update_attrs %{email: "some updated email", password_hash: "some updated password_hash"}
     @invalid_attrs %{email: nil, password_hash: nil}

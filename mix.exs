@@ -33,6 +33,7 @@ defmodule Bookmarx.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # phoenix base dependencies
       {:phoenix, "~> 1.3.1"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
@@ -40,7 +41,11 @@ defmodule Bookmarx.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      # authentication dependencies
+      {:guardian, "~> 1.0"},
+      {:comeonin, "~> 4.0"},
+      {:pbkdf2_elixir, "~> 0.12"},  # password hashing w/o C dependencies
     ]
   end
 
